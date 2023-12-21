@@ -1,0 +1,1009 @@
+	 
+Q1. Create an android application to demonstrate the working of Implicit Intent.Use uri parsing.
+Code – Activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent"
+tools:context=".MainActivity">
+
+<Button
+android:id="@+id/btnOpenWebpage" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true" android:text="Open Webpage" />
+</RelativeLayout>
+MainActivity.java
+package com.example.firstpractical;
+import androidx.appcompat.app.AppCompatActivity; import android.content.Intent;
+import android.net.Uri; import android.os.Bundle; import android.view.View; import android.widget.Button;
+public class MainActivity extends AppCompatActivity { @Override
+protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); setContentView(R.layout.activity_main);
+ 
+
+Button btnOpenWebpage = findViewById(R.id.btnOpenWebpage); btnOpenWebpage.setOnClickListener(new View.OnClickListener() {
+ 
+
+@Override
+public void onClick(View v) { openWebpage();
+}
+});	}
+private void openWebpage() {
+Uri webpageUri = Uri.parse("https://www.google.com"); Intent intent = new Intent(Intent.ACTION_VIEW, webpageUri); if (intent.resolveActivity(getPackageManager()) != null) {
+startActivity(intent);
+}	}}
+Output-
+
+ 
+
+Q2. Create an android application to demonstrate the working of Implicit Intent. Use Phone calling
+Code – Activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent"
+tools:context=".MainActivity">
+<Button
+android:id="@+id/btnMakePhoneCall" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true" android:text="Make Phone Call" />
+</RelativeLayout>
+
+Main_activity.java
+package com.example.myapplication;
+import androidx.appcompat.app.AppCompatActivity; import android.content.Intent;
+import android.net.Uri; import android.os.Bundle; import android.view.View; import android.widget.Button;
+public class MainActivity extends AppCompatActivity { @Override
+protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); setContentView(R.layout.activity_main);
+Button btnMakePhoneCall = findViewById(R.id.btnMakePhoneCall); btnMakePhoneCall.setOnClickListener(new View.OnClickListener() {
+@Override
+ 
+
+public void onClick(View v) { makePhoneCall();	}
+});	}
+private void makePhoneCall() {
+Uri phoneUri = Uri.parse("tel:+1234567890");
+Intent intent = new Intent(Intent.ACTION_DIAL, phoneUri); if (intent.resolveActivity(getPackageManager()) != null) {
+startActivity(intent);
+}	}
+}
+Output –
+
+ 
+
+Q3. Create an android application to demonstrate the working of Implicit Intent. Use Email.
+Code- xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent"
+tools:context=".MainActivity">
+<Button
+android:id="@+id/btnSendEmail" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true" android:text="Send Email" />
+</RelativeLayout>
+Java
+package com.example.myapplication;
+import androidx.appcompat.app.AppCompatActivity; import android.content.Intent;
+import android.os.Bundle; import android.view.View; import android.widget.Button;
+public class MainActivity extends AppCompatActivity { @Override
+protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); setContentView(R.layout.activity_main);
+Button btnSendEmail = findViewById(R.id.btnSendEmail); btnSendEmail.setOnClickListener(new View.OnClickListener() {
+@Override
+public void onClick(View v) { sendEmail();
+}
+});	}
+ 
+
+private void sendEmail() {
+String[] recipients = {"recipient@example.com"}; String subject = "Subject";
+String message = "Hello, this is the email message."; Intent intent = new Intent(Intent.ACTION_SEND); intent.setType("message/rfc822"); intent.putExtra(Intent.EXTRA_EMAIL, recipients); intent.putExtra(Intent.EXTRA_SUBJECT, subject); intent.putExtra(Intent.EXTRA_TEXT, message);
+if (intent.resolveActivity(getPackageManager()) != null) { startActivity(Intent.createChooser(intent, "Send Email"));
+}
+}}
+Output-
+
+ 
+
+Q4. Create an android application to demonstrate the working of Explicit intent where insert User name and age from user and display both content on the second activity. use putExtra and getExtra
+Code- Activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical"
+android:padding="16dp" tools:context=".MainActivity">
+<EditText android:id="@+id/editTextName" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Enter Name" />
+<EditText android:id="@+id/editTextAge" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Enter Age" android:inputType="number" />
+<Button
+android:id="@+id/buttonSubmit" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Submit" />
+</LinearLayout>
+Main_Activity.java
+package com.example.fourthapplication; import android.content.Intent;
+import android.os.Bundle; import android.view.View;
+ 
+
+import android.widget.Button; import android.widget.EditText;
+import androidx.appcompat.app.AppCompatActivity; public class MainActivity extends AppCompatActivity {
+@Override
+protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); setContentView(R.layout.activity_main);
+final EditText editTextName = findViewById(R.id.editTextName); final EditText editTextAge = findViewById(R.id.editTextAge); Button buttonSubmit = findViewById(R.id.buttonSubmit); buttonSubmit.setOnClickListener(new View.OnClickListener() {
+@Override
+public void onClick(View view) {
+String name = editTextName.getText().toString(); String age = editTextAge.getText().toString();
+Intent intent = new Intent(MainActivity.this, SecondActivity.class); intent.putExtra("user_name", name);
+intent.putExtra("user_age", age); startActivity(intent);
+}
+});	}
+}
+
+activity_main2.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical"
+android:padding="16dp" tools:context=".SecondActivity">
+<TextView android:id="@+id/textViewName" android:layout_width="match_parent" android:layout_height="wrap_content"
+ 
+
+android:text="User Name: " />
+<TextView android:id="@+id/textViewAge" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="User Age: " />
+</LinearLayout>
+
+SecondActivity.java
+package com.example.fourthapplication; import android.os.Bundle;
+import android.widget.TextView;
+import androidx.appcompat.app.AppCompatActivity; public class SecondActivity extends AppCompatActivity {
+@Override
+protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); setContentView(R.layout.activity_main2);
+TextView textViewName = findViewById(R.id.textViewName); TextView textViewAge = findViewById(R.id.textViewAge); String name = getIntent().getStringExtra("user_name");
+String age = getIntent().getStringExtra("user_age"); textViewName.setText("User Name: " + name); textViewAge.setText("User Age: " + age);	}
+}
+Output-
+ 
+ 
+
+Q5. Create an android application to demonstrate the working of bundle class, where create first activity as student marksheet and display the content result on second activity and display congratulation on third activity or try again on third activity.Use bundle concept
+Code- Activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent" tools:context=".StudentMarksheetActivity">
+<EditText android:id="@+id/editTextSubject1" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Subject 1 Marks" />
+<EditText android:id="@+id/editTextSubject2" android:layout_width="match_parent" android:layout_height="wrap_content"
+android:layout_below="@id/editTextSubject1" android:hint="Subject 2 Marks" />
+<Button
+android:id="@+id/buttonCalculateResult" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_below="@id/editTextSubject2" android:layout_centerHorizontal="true" android:text="Calculate Result" />
+</RelativeLayout>
+StudentMarksheet.java
+package com.example.myapplication;
+ 
+
+import androidx.appcompat.app.AppCompatActivity; import android.content.Intent;
+import android.os.Bundle; import android.view.View; import android.widget.Button; import android.widget.EditText;
+public class StudentMarksheetActivity extends AppCompatActivity { @Override
+protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); setContentView(R.layout.activity_main);
+final EditText editTextSubject1 = findViewById(R.id.editTextSubject1); final EditText editTextSubject2 = findViewById(R.id.editTextSubject2); Button buttonCalculateResult = findViewById(R.id.buttonCalculateResult); buttonCalculateResult.setOnClickListener(new View.OnClickListener() {
+@Override
+public void onClick(View view) {
+int marks1 = Integer.parseInt(editTextSubject1.getText().toString()); int marks2 = Integer.parseInt(editTextSubject2.getText().toString()); int totalMarks = marks1 + marks2;
+String result = (totalMarks >= 60) ? "Pass" : "Fail"; Bundle bundle = new Bundle(); bundle.putString("result", result);
+Intent intent = new Intent(StudentMarksheetActivity.this, ResultActivity.class);
+intent.putExtras(bundle); startActivity(intent);
+}
+});	}}
+
+activity_result.xml
+ 
+
+tools:context=".ResultActivity"
+<TextView android:id="@+id/textViewResult" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true"	/>
+</RelativeLayout>
+ResultActivity.java
+package com.example.myapplication;
+import androidx.appcompat.app.AppCompatActivity; import android.content.Intent;
+import android.os.Bundle;
+import android.widget.TextView;
+public class ResultActivity extends AppCompatActivity { @Override
+protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); setContentView(R.layout.activity_result);
+TextView textViewResult = findViewById(R.id.textViewResult); Bundle bundle = getIntent().getExtras();
+if (bundle != null) {
+String result = bundle.getString("result"); textViewResult.setText("Result: " + result);
+Class<?> nextActivityClass = (result.equals("Pass")) ? try_again.class : StudentMarksheetActivity.class;
+Intent intent = new Intent(ResultActivity.this, nextActivityClass); intent.putExtra("previous_activity", ResultActivity.class); startActivity(intent);
+}
+}
+}
+try_again.xml
+ 
+
+tools:context=".try_again">
+<TextView android:id="@+id/textViewMessage" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true" /
+<Button
+android:id="@+id/buttonTryAgain" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_below="@id/textViewMessage" android:layout_centerHorizontal="true" android:text="Try Again" />
+</RelativeLayout>
+Try_again.java
+package com.example.myapplication;
+import androidx.appcompat.app.AppCompatActivity; import android.content.Intent;
+import android.os.Bundle; import android.view.View; import android.widget.Button;
+import android.widget.TextView;
+public class try_again extends AppCompatActivity { @Override
+protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); setContentView(R.layout.try_again);
+TextView textViewMessage = findViewById(R.id.textViewMessage); Button buttonTryAgain = findViewById(R.id.buttonTryAgain);
+Intent intent = getIntent();
+Class<?> previousActivityClass = (Class<?>) intent.getSerializableExtra("previous_activity");
+if (previousActivityClass == StudentMarksheetActivity.class) { textViewMessage.setText("Try Again");
+} else if (previousActivityClass == ResultActivity.class) { textViewMessage.setText("Congratulations!");
+}
+buttonTryAgain.setOnClickListener(new View.OnClickListener() { @Override	public void onClick(View view) {
+ 
+
+Intent tryAgainIntent = new Intent(try_again.this, StudentMarksheetActivity.class);
+startActivity(tryAgainIntent);
+}
+});	}
+}
+Output –
+
+ 
+
+Q6. Create an android application to demonstrate working of simple adapter Code-
+Activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent"
+android:orientation="vertical" android:padding="16dp" tools:context=".MainActivity">
+
+<ListView android:id="@+id/listView"
+android:layout_width="match_parent" android:layout_height="match_parent"/>
+</LinearLayout>
+
+List_item.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="wrap_content"
+android:orientation="horizontal" android:padding="8dp">
+<ImageView android:id="@+id/imageView" android:layout_width="40dp" android:layout_height="40dp"
+/>
+
+<TextView android:id="@+id/textView" android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+ 
+
+android:layout_gravity="center_vertical" android:textSize="18sp" android:paddingStart="8dp" android:paddingLeft="8dp" />
+</LinearLayout>
+
+MainActivity.java
+<?xml version="1.0" encoding="utf-8"?package com.example.sixthapplication; import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle; import android.widget.ListView;
+import android.widget.SimpleAdapter; import java.util.ArrayList;
+import java.util.HashMap; import java.util.List;
+public class MainActivity extends AppCompatActivity { @Override
+protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); setContentView(R.layout.activity_main);
+String[] fruits = {"Apple", "Banana", "Cherry", "Date", "Fig"};
+int[] icons = {R.drawable.apple, R.drawable.banana, R.drawable.cherry, R.drawable.date, R.drawable.fig};
+List<HashMap<String, String>> data = new ArrayList<>(); for (int i = 0; i < fruits.length; i++) {
+HashMap<String, String> map = new HashMap<>(); map.put("fruit", fruits[i]);
+map.put("icon", Integer.toString(icons[i])); data.add(map);
+}
+String[] from = {"fruit", "icon"};
+int[] to = {R.id.textView, R.id.imageView};
+SimpleAdapter adapter = new SimpleAdapter(this, data, R.layout.list_item, from, to);
+ListView listView = findViewById(R.id.listView); listView.setAdapter(adapter);
+}}
+ 
+
+Output –
+
+ 
+
+Q7. Create an android application to demonstrate the working of custom adapter use string.xml resource file
+Code- Xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent"
+android:orientation="vertical" android:padding="16dp" tools:context=".MainActivity">
+
+<ListView android:id="@+id/listView"
+android:layout_width="match_parent" android:layout_height="match_parent" />
+</LinearLayout>
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="wrap_content"
+android:orientation="horizontal" android:padding="8dp">
+<ImageView android:id="@+id/imageView" android:layout_width="40dp" android:layout_height="40dp" />
+
+<TextView android:id="@+id/textView" android:layout_width="wrap_content"
+android:layout_height="wrap_content" android:layout_gravity="center_vertical" android:textSize="18sp"
+ 
+
+android:paddingStart="8dp" />
+</LinearLayout>
+
+Java
+package com.example.seventhapplication; import android.os.Bundle;
+import android.widget.ListView;
+import androidx.appcompat.app.AppCompatActivity; import java.util.ArrayList;
+import java.util.List;
+public class MainActivity extends AppCompatActivity { @Override
+protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); setContentView(R.layout.activity_main);
+String[] fruits = getResources().getStringArray(R.array.fruits); int[] icons = {
+R.drawable.apple, R.drawable.banana, R.drawable.cherry, R.drawable.date, R.drawable.fig
+};
+List<Fruit> fruitList = new ArrayList<>(); for (int i = 0; i < fruits.length; i++) {
+Fruit fruit = new Fruit(fruits[i], icons[i]); fruitList.add(fruit);
+}
+FruitAdapter adapter = new FruitAdapter(this, fruitList); ListView listView = findViewById(R.id.listView); listView.setAdapter(adapter);
+}
+}
+Java
+package com.example.seventhapplication; import android.content.Context;
+import android.view.LayoutInflater;
+ 
+
+import android.view.View; import android.view.ViewGroup;
+import android.widget.ArrayAdapter; import android.widget.ImageView; import android.widget.TextView; import java.util.List;
+public class FruitAdapter extends ArrayAdapter<Fruit> { public FruitAdapter(Context context, List<Fruit> fruits) {
+super(context, 0, fruits);
+}
+@Override
+public View getView(int position, View convertView, ViewGroup parent) { View listItemView = convertView;
+if (listItemView == null) {
+listItemView = LayoutInflater.from(getContext()).inflate(R.layout.list_item, parent, false);
+}
+Fruit currentFruit = getItem(position);
+ImageView imageView = listItemView.findViewById(R.id.imageView); imageView.setImageResource(currentFruit.getIcon());
+TextView textView = listItemView.findViewById(R.id.textView); textView.setText(currentFruit.getName());
+return listItemView;
+}
+}
+OutPut-
+ 
+ 
+
+Q8. Create an android application to implement Alert dialog box , where create a quiz of atleast 5 MCQ and display the result on alert box and after click on positive button of alert Box display toast successful
+Code- Xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent"
+android:orientation="vertical" android:padding="16dp" tools:context=".MainActivity">
+<Button
+android:id="@+id/btnStartQuiz" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Start Quiz" />
+</LinearLayout>
+
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="wrap_content"
+android:padding="16dp">
+
+<TextView android:id="@+id/textViewQuestion" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Question" android:textSize="18sp" />
+
+<RadioGroup android:id="@+id/radioGroupOptions"
+ 
+
+android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_below="@id/textViewQuestion">
+<RadioButton android:id="@+id/radioButtonOption1" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Option 1" />
+
+<!-- Repeat RadioButton elements for each MCQ option -->
+</RadioGroup>
+</RelativeLayout>
+
+Java
+package com.example.eighthapplication;
+import androidx.appcompat.app.AppCompatActivity; import android.content.DialogInterface;
+import android.os.Bundle;
+import android.view.LayoutInflater; import android.view.View;
+import android.widget.Button; import android.widget.RadioButton; import android.widget.RadioGroup; import android.widget.TextView; import android.widget.Toast;
+import androidx.appcompat.app.AlertDialog;
+public class MainActivity extends AppCompatActivity { private String[] questions = {
+"Question 1: What is 2 + 2?",
+"Question 2: Which is the capital of France?",
+};
+private String[][] options = {
+{"3", "4", "5", "6"},
+ 
+
+{"Paris", "London", "Berlin", "Madrid"},
+};
+private int[] correctAnswers = {1, 0}; private int currentQuestionIndex = 0; private int score = 0;
+@Override
+protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); setContentView(R.layout.activity_main);
+
+Button btnStartQuiz = findViewById(R.id.btnStartQuiz); btnStartQuiz.setOnClickListener(new View.OnClickListener() {
+@Override
+public void onClick(View view) { showNextQuestion();
+}
+});
+}
+private void showNextQuestion() {
+if (currentQuestionIndex < questions.length) {
+AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this); LayoutInflater inflater = getLayoutInflater();
+View view = inflater.inflate(R.layout.quiz_questions, null); alertDialogBuilder.setView(view);
+final TextView textViewQuestion = view.findViewById(R.id.textViewQuestion);
+final RadioGroup radioGroupOptions = view.findViewById(R.id.radioGroupOptions);
+textViewQuestion.setText(questions[currentQuestionIndex]); for (int i = 0; i < options[currentQuestionIndex].length; i++) {
+RadioButton radioButton = new RadioButton(this); radioButton.setText(options[currentQuestionIndex][i]); radioGroupOptions.addView(radioButton);
+}
+alertDialogBuilder
+.setTitle("Question " + (currentQuestionIndex + 1))
+.setPositiveButton("Submit", new DialogInterface.OnClickListener() { @Override
+public void onClick(DialogInterface dialogInterface, int i) {
+ 
+
+int selectedOptionIndex = radioGroupOptions.indexOfChild( findViewById(radioGroupOptions.getCheckedRadioButtonId()));
+if (selectedOptionIndex == correctAnswers[currentQuestionIndex]) {
+score++;
+}
+currentQuestionIndex++;
+if (currentQuestionIndex < questions.length) { showNextQuestion();
+} else {
+showResult();
+}
+}
+})
+.setCancelable(false)
+.show();
+}
+}
+private void showResult() {
+AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
+alertDialogBuilder
+.setTitle("Quiz Result")
+.setMessage("You scored " + score + " out of " + questions.length)
+.setPositiveButton("OK", new DialogInterface.OnClickListener() { @Override
+public void onClick(DialogInterface dialogInterface, int i) { if (score == questions.length) {
+Toast.makeText(MainActivity.this, "Congratulations!", Toast.LENGTH_SHORT).show();
+}
+}
+})
+.setCancelable(false)
+.show();
+}
+}
+ 
+
+Output-
+
+ 
+
+Q9. Create an android application to implement Date Picker dialog box Code-
+Xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent"
+tools:context=".MainActivity">
+<Button
+android:id="@+id/btnOpenDatePicker" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Select Date" android:layout_centerInParent="true" />
+</RelativeLayout>
+
+Java
+package com.example.ninthapplication;
+import androidx.appcompat.app.AppCompatActivity; import android.app.DatePickerDialog;
+import android.os.Bundle; import android.view.View; import android.widget.Button;
+import android.widget.DatePicker; import java.util.Calendar;
+public class MainActivity extends AppCompatActivity { private Button btnOpenDatePicker;
+private int year, month, day; @Override
+protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); setContentView(R.layout.activity_main);
+btnOpenDatePicker = findViewById(R.id.btnOpenDatePicker); btnOpenDatePicker.setOnClickListener(new View.OnClickListener() {
+ 
+
+@Override
+public void onClick(View view) { showDatePickerDialog();
+}
+});	}
+private void showDatePickerDialog() {
+Calendar calendar = Calendar.getInstance(); year = calendar.get(Calendar.YEAR);
+month = calendar.get(Calendar.MONTH);
+day = calendar.get(Calendar.DAY_OF_MONTH); DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+new DatePickerDialog.OnDateSetListener() {	@Override public void onDateSet(DatePicker datePicker, int selectedYear, int
+selectedMonth, int selectedDay) {
+year = selectedYear; month = selectedMonth; day = selectedDay;
+btnOpenDatePicker.setText(day + "/" + (month + 1) + "/" + year);
+}
+}, year, month, day); datePickerDialog.show();
+}
+}
+OutPut-
+
+ 
+
+Q10. Create an android application to implement Date Picker using Calendar class. Code-
+Xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent"
+tools:context=".MainActivity">
+<Button
+android:id="@+id/btnOpenDatePicker" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Select Date" android:layout_centerInParent="true" />
+</RelativeLayout>
+
+Java
+package com.example.tenthapplication;
+import androidx.appcompat.app.AppCompatActivity; import android.app.DatePickerDialog;
+import android.os.Bundle; import android.view.View; import android.widget.Button;
+import android.widget.DatePicker; import java.util.Calendar;
+public class MainActivity extends AppCompatActivity { private Button btnOpenDatePicker;
+private Calendar calendar; @Override
+protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); setContentView(R.layout.activity_main);
+btnOpenDatePicker = findViewById(R.id.btnOpenDatePicker);
+ 
+
+calendar = Calendar.getInstance(); btnOpenDatePicker.setOnClickListener(new View.OnClickListener() {
+@Override
+public void onClick(View view) { showDatePickerDialog();
+}
+});	}
+private void showDatePickerDialog() {
+int year = calendar.get(Calendar.YEAR);
+int month = calendar.get(Calendar.MONTH);
+int day = calendar.get(Calendar.DAY_OF_MONTH); DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+new DatePickerDialog.OnDateSetListener() { @Override
+public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
+calendar.set(selectedYear, selectedMonth, selectedDay); int displayMonth = selectedMonth + 1;
+btnOpenDatePicker.setText(selectedDay + "/" + displayMonth + "/"
++ selectedYear);
+}
+}, year, month, day); datePickerDialog.show();
+}	}
+Output –
+ 
+
+Q11. Create an android application to implement Time picker Code-
+Xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent"
+tools:context=".MainActivity">
+<Button
+android:id="@+id/btnOpenTimePicker" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Select Time" android:layout_centerInParent="true" />
+</RelativeLayout>
+Java
+package com.example.eleventhapplicayion;
+import androidx.appcompat.app.AppCompatActivity; import android.app.TimePickerDialog;
+import android.os.Bundle; import android.view.View; import android.widget.Button;
+import android.widget.TimePicker; import java.util.Calendar;
+public class MainActivity extends AppCompatActivity { private Button btnOpenTimePicker;
+private Calendar calendar; @Override
+protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); setContentView(R.layout.activity_main);
+btnOpenTimePicker = findViewById(R.id.btnOpenTimePicker); calendar = Calendar.getInstance();
+btnOpenTimePicker.setOnClickListener(new View.OnClickListener() { @Override
+ 
+
+public void onClick(View view) { showTimePickerDialog();
+}	});	}
+private void showTimePickerDialog() {
+int hour = calendar.get(Calendar.HOUR_OF_DAY); int minute = calendar.get(Calendar.MINUTE);
+TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+@Override
+public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+calendar.set(Calendar.HOUR_OF_DAY, selectedHour); calendar.set(Calendar.MINUTE, selectedMinute); btnOpenTimePicker.setText(selectedHour + ":" + selectedMinute);
+}		}, hour, minute, true); timePickerDialog.show();
+}}
+Output –
+ 
+ 
+
+Q12. Create an android application to demonstrate working of Option Menu for famous countries.
+Code- Xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent"
+tools:context=".MainActivity">
+<TextView android:id="@+id/textViewCountry" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Select a Country" android:layout_centerInParent="true" android:textSize="20sp" />
+</RelativeLayout>
+
+<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
+<item
+android:id="@+id/country_menu" android:title="Countries" app:showAsAction="ifRoom">
+<menu>
+<item
+android:id="@+id/country_us" android:title="United States" />
+<item
+android:id="@+id/country_uk" android:title="United Kingdom" />
+ 
+
+<item
+android:id="@+id/country_france" android:title="France" />
+<item
+android:id="@+id/country_germany" android:title="Germany" />
+<item
+android:id="@+id/country_japan" android:title="Japan" />
+</menu>
+</item>
+</menu>
+
+Java
+package com.example.tweltfhapplication; import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity; import android.os.Bundle;
+import android.view.Menu; import android.view.MenuItem; import android.widget.TextView; import android.view.Menu; import android.view.MenuItem;
+public class MainActivity extends AppCompatActivity { private TextView textViewCountry;
+@Override
+protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); setContentView(R.layout.activity_main);
+textViewCountry = findViewById(R.id.textViewCountry);
+}
+@Override
+public boolean onCreateOptionsMenu(Menu menu) { getMenuInflater().inflate(R.menu.country_menu, menu); return true;
+}
+@Override
+public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+ 
+
+switch (item.getItemId()) { case R.id.country_us:
+textViewCountry.setText("United States"); return true;
+case R.id.country_uk: textViewCountry.setText("United Kingdom"); return true;
+case R.id.country_france: textViewCountry.setText("France"); return true;
+case R.id.country_germany: textViewCountry.setText("Germany"); return true;
+case R.id.country_japan: textViewCountry.setText("Japan"); return true;
+default:
+return super.onOptionsItemSelected(item);
+}
+}
+}
+Output –
+
+
+Q13. Create an android application to demonstrate working of popup menu for menu of food.
+Code- Xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent"
+tools:context=".MainActivity">
+<Button
+android:id="@+id/btnOpenPopupMenu"
+ 
+
+android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="View Menu" android:layout_centerInParent="true" />
+</RelativeLayout>
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item
+android:id="@+id/menu_pizza" android:title="Pizza" />
+<item
+android:id="@+id/menu_burger" android:title="Burger" />
+<item
+android:id="@+id/menu_pasta" android:title="Pasta" />
+<item
+android:id="@+id/menu_sushi" android:title="Sushi" />
+</menu>
+
+Java
+package com.example.a13application;
+import androidx.appcompat.app.AppCompatActivity; import android.os.Bundle;
+import android.view.MenuInflater; import android.view.MenuItem; import android.view.View;
+import android.widget.Button; import android.widget.PopupMenu; import android.widget.Toast;
+public class MainActivity extends AppCompatActivity { private Button btnOpenPopupMenu;
+@Override
+protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); setContentView(R.layout.activity_main);
+btnOpenPopupMenu = findViewById(R.id.btnOpenPopupMenu); btnOpenPopupMenu.setOnClickListener(new View.OnClickListener() {
+ 
+
+@Override
+public void onClick(View view) { showPopupMenu(view);
+}
+});	}
+private void showPopupMenu(View view) {
+PopupMenu popupMenu = new PopupMenu(this, view); MenuInflater inflater = popupMenu.getMenuInflater(); inflater.inflate(R.menu.food_menu, popupMenu.getMenu()); popupMenu.setOnMenuItemClickListener(new
+PopupMenu.OnMenuItemClickListener() { @Override
+public boolean onMenuItemClick(MenuItem menuItem) { String foodItem = menuItem.getTitle().toString();
+Toast.makeText(MainActivity.this, "You selected: " + foodItem, Toast.LENGTH_SHORT).show();
+return true;
+}	});
+popupMenu.show();
+}}
+Output –
+
+ 
+
+Q14. Create an android application to demonstrate working of Context Menu for all file options
+Code- Xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent"
+tools:context=".MainActivity">
+
+<ListView android:id="@+id/listViewFiles" android:layout_width="match_parent" android:layout_height="match_parent" />
+</RelativeLayout>
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item
+android:id="@+id/menu_option_open" android:title="Open" />
+<item
+android:id="@+id/menu_option_edit" android:title="Edit" />
+<item
+android:id="@+id/menu_option_delete" android:title="Delete" />
+</menu>
+
+Java
+package com.example.a14application; import android.os.Bundle;
+import android.view.ContextMenu; import android.view.Menu;
+import android.view.MenuItem; import android.view.View;
+ 
+
+import android.widget.AdapterView; import android.widget.ArrayAdapter; import android.widget.ListView; import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity; public class MainActivity extends AppCompatActivity {
+private ListView listViewFiles;
+private String[] fileNames = {"File1.txt", "File2.txt", "File3.txt"}; @Override
+protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); setContentView(R.layout.activity_main); listViewFiles = findViewById(R.id.listViewFiles);
+ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, fileNames);
+listViewFiles.setAdapter(adapter); registerForContextMenu(listViewFiles);
+}
+@Override
+public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+super.onCreateContextMenu(menu, v, menuInfo); getMenuInflater().inflate(R.menu.file_context_menu, menu);
+}
+@Override
+public boolean onContextItemSelected(MenuItem item) { AdapterView.AdapterContextMenuInfo info =
+(AdapterView.AdapterContextMenuInfo) item.getMenuInfo(); String selectedFile = fileNames[info.position];
+switch (item.getItemId()) {
+case R.id.menu_option_open: showToast("Open: " + selectedFile); return true;
+case R.id.menu_option_edit: showToast("Edit: " + selectedFile); return true;
+case R.id.menu_option_delete: showToast("Delete: " + selectedFile); return true;
+ 
+
+default:
+return super.onContextItemSelected(item);
+}	}
+private void showToast(String message) {
+Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+}}
+Output -
+
+
+ 
+
+Q15. Create an android application to implement rating bar Code-
+Xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent"
+tools:context=".MainActivity">
+
+
+<RatingBar android:id="@+id/ratingBar" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true" android:numStars="5" android:stepSize="1.0" />
+</RelativeLayout>
+Java
+package com.example.ratingbardemo;
+
+
+import android.os.Bundle;
+import android.widget.RatingBar; import android.widget.Toast;
+ 
+
+import androidx.appcompat.app.AppCompatActivity;
+
+
+public class MainActivity extends AppCompatActivity {
+
+
+private RatingBar ratingBar;
+
+
+@Override
+protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); setContentView(R.layout.activity_main);
+
+ratingBar = findViewById(R.id.ratingBar);
+
+
+ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+@Override
+public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+String ratingMessage = "Rating: " + rating; Toast.makeText(MainActivity.this, ratingMessage,
+Toast.LENGTH_SHORT).show();
+}
+});
+}
+}
+ 
+
+Output –
+
+ 
+
+
+
+
+
+ 
+
+
+
+
+Q.1) Write a program to Plot the correlation plot on dataset and visualize giving an overview of relationships among data on iris data.
+
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+
+# Load the iris dataset
+iris = sns.load_dataset("iris")
+
+
+# Calculate the correlation matrix corr = iris.corr()
+
+# Plot the heatmap
+plt.figure(figsize=(10, 8)) # Set the size of the figure sns.heatmap(corr, annot=True, cmap='coolwarm', vmin=-1, vmax=1)
+
+# Display the plot
+plt.title("Correlation Plot of Iris Dataset") plt.show()
+
+Output:
+ 
+
+ 
+
+
+Q2) Write a program to implement linear regression algorithm to create and evaluate a model on a given dataset
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+def estimate_coef(x, y):
+# number of observations/points n = np.size(x)
+
+# mean of x and y vector m_x = np.mean(x)
+m_y = np.mean(y)
+
+
+# calculating cross-deviation and deviation about x SS_xy = np.sum(y*x) - n*m_y*m_x
+SS_xx = np.sum(x*x) - n*m_x*m_x
+
+
+# calculating regression coefficients b_1 = SS_xy / SS_xx
+b_0 = m_y - b_1*m_x
+ 
+
+return (b_0, b_1)
+
+
+def plot_regression_line(x, y, b):
+# plotting the actual points as scatter plot plt.scatter(x, y, color = "m",
+marker = "o", s = 30)
+
+
+# predicted response vector y_pred = b[0] + b[1]*x
+
+# plotting the regression line plt.plot(x, y_pred, color = "g")
+
+# putting labels plt.xlabel('x')
+plt.ylabel('y')
+
+
+# function to show plot plt.show()
+
+def main():
+# observations / data
+x = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+y = np.array([1, 3, 2, 5, 7, 8, 8, 9, 10, 12])
+
+
+# estimating coefficients b = estimate_coef(x, y)
+print("Estimated coefficients:\nb_0 = {} \
+\nb_1 = {}".format(b[0], b[1]))
+ 
+# plotting regression line plot_regression_line(x, y, b)
+
+if   name	== "  main  ":
+main()
+
+
+Output:
+
+
+
+
+Q3) Write a program to classify the given dataset using logistic regression and evaluate the model
+
+
+import numpy as np import pandas as pd
+from sklearn.model_selection import train_test_split from sklearn.linear_model import LogisticRegression
+ 
+from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
+
+
+# Load iris dataset
+from sklearn.datasets import load_iris data = load_iris()
+df = pd.DataFrame(data.data, columns=data.feature_names) df['species'] = data.target
+
+# Set target variable to 1 if species is 'setosa', and 0 otherwise y = (df['species'] == 0).astype(int)
+X = df.drop('species', axis=1)
+
+
+# Split the dataset into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+
+# Create a logistic regression model
+model = LogisticRegression(max_iter=1000)
+
+
+# Train the model model.fit(X_train, y_train)
+
+# Predict values for the test set y_pred = model.predict(X_test)
+
+# Evaluate the model
+print("Accuracy:", accuracy_score(y_test, y_pred)) print("\nClassification Report:\n", classification_report(y_test, y_pred)) print("\nConfusion Matrix:\n", confusion_matrix(y_test, y_pred))
+
+Output:
+ 
+
+ 
+
+
+
+
+
+Q4) Write a program to implement support vector machine algorithm
+
+
+# Import necessary libraries from sklearn import datasets from sklearn import svm
+from sklearn.model_selection import train_test_split from sklearn.metrics import accuracy_score
+
+# Load a sample dataset (e.g., the Iris dataset) iris = datasets.load_iris()
+X = iris.data y = iris.target
+
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+
+# Create an SVM classifier (you can choose different kernel types, such as 'linear', 'rbf', etc.) clf = svm.SVC(kernel='linear')
+
+# Fit the classifier on the training data clf.fit(X_train, y_train)
+ 
+
+# Make predictions on the test data y_pred = clf.predict(X_test)
+
+# Calculate the accuracy of the classifier accuracy = accuracy_score(y_test, y_pred) print(f"Accuracy: {accuracy}")
+
+# You can also get the support vectors and other parameters print("Support Vectors:")
+print(clf.support_vectors_) print("Coefficients (weights):") print(clf.coef_) print("Intercepts:") print(clf.intercept_)
+
+output:
+ 
+
+ 
+
+
+
+
+
+
+
+
+Q5) Write a program to implement Decision Tree model on the given dataset
+
+
+import pandas
+from sklearn import tree
+from sklearn.tree import DecisionTreeClassifier import matplotlib.pyplot as plt
+
+df = pandas.read_csv(r"C:\Users\hp\Downloads\data.csv")
+ 
+
+d = {'UK': 0, 'USA': 1, 'N': 2}
+df['Nationality'] = df['Nationality'].map(d) d = {'YES': 1, 'NO': 0}
+df['Go'] = df['Go'].map(d)
+
+
+features = ['Age', 'Experience', 'Rank', 'Nationality']
+
+
+X = df[features] y = df['Go']
+
+dtree = DecisionTreeClassifier() dtree = dtree.fit(X, y)
+
+tree.plot_tree(dtree, feature_names=features)
+
+
+output:
+
+
+ 
+
+
+
+Q6) Write a program to implement Bayesian classification on given dataset.
+
+
+import numpy as np import pandas as pd
+from sklearn.model_selection import train_test_split from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
+
+
+# Load iris dataset
+from sklearn.datasets import load_iris data = load_iris()
+df = pd.DataFrame(data.data, columns=data.feature_names) df['species'] = data.target
+
+X = df.drop('species', axis=1) y = df['species']
+
+# Split the dataset into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+
+# Create a Gaussian Naive Bayes classifier model = GaussianNB()
+
+# Train the model model.fit(X_train, y_train)
+
+# Predict values for the test set y_pred = model.predict(X_test)
+ 
+# Evaluate the model
+print("Accuracy:", accuracy_score(y_test, y_pred)) print("\nClassification Report:\n", classification_report(y_test, y_pred)) print("\nConfusion Matrix:\n", confusion_matrix(y_test, y_pred))
+
+Output:
+
+
+
