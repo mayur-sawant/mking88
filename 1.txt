@@ -1,0 +1,665 @@
+Q1] Write a program to implement following functions in numpy library Array, arange, len, ndim, slicing, copy, view, reshape, concatenate, split
+import numpy as np
+# Array function
+def my_array(arr_list):
+    return np.array(arr_list)
+# arange function
+def my_arange(start, stop, step=1):
+    return np.arange(start, stop, step)
+# len function
+def my_len(arr):
+    return len(arr)
+# ndim function
+def my_ndim(arr):
+    return arr.ndim
+# slicing function
+def my_slicing(arr, start=None, stop=None, step=None):
+    return arr[start:stop:step]
+# copy function
+def my_copy(arr):
+    return arr.copy()
+# view function
+def my_view(arr):
+    return arr.view()
+# reshape function
+def my_reshape(arr, shape):
+    if np.prod(shape) != np.prod(arr.shape):
+        raise ValueError("Cannot reshape array into the specified shape")
+    return arr.reshape(shape)
+# concatenate function
+def my_concatenate(arr1, arr2, axis=0):
+    return np.concatenate((arr1, arr2), axis=axis)
+# split function
+def my_split(arr, indices, axis=0):
+    return np.split(arr, indices, axis=axis)
+# Testing the functions
+arr1 = my_array([1, 2, 3, 4, 5])
+arr2 = my_array([6, 7, 8, 9, 10])
+print("Array:")
+print(arr1)
+print("\narange:")
+print(my_arange(0, 10, 2))
+print("\nlen:")
+print(my_len(arr1))
+print("\nndim:")
+print(my_ndim(arr1))
+print("\nslicing:")
+print(my_slicing(arr1, 1, 4, 1))
+print("\ncopy:")
+arr1_copy = my_copy(arr1)
+print(arr1_copy)
+print("\nview:")
+arr1_view = my_view(arr1)
+print(arr1_view)
+print("\nreshape:")
+arr1_reshaped = my_reshape(arr1, (1, 5))  # Corrected reshape to (1, 5)
+print(arr1_reshaped)
+print("\nconcatenate:")
+print(my_concatenate(arr1, arr2))
+print("\nsplit:")
+arr_split = my_split(arr1, [2, 4])  # Split into parts of sizes [2, 3]
+print(arr_split)
+Output:
+ 
+ 
+
+Q2] Write a program to implement following functions in pandas library Dataframe, dropna, fillna, replace specific values
+import pandas as pd
+import numpy as np
+# DataFrame function
+def my_dataframe(data_dict):
+    return pd.DataFrame(data_dict)
+# dropna function
+def my_dropna(df):
+    return df.dropna()
+# fillna function
+def my_fillna(df, value):
+    return df.fillna(value)
+# replace function
+def my_replace(df, old_value, new_value):
+    return df.replace(old_value, new_value)
+# Testing the functions
+data = {'A': [1, 2, np.nan, 4],
+        'B': [5, np.nan, 7, 8],
+        'C': [9, 10, 11, 12]}
+df = my_dataframe(data)
+print("Original DataFrame:")
+print(df)
+print("\ndropna:")
+print(my_dropna(df))
+print("\nfillna:")
+print(my_fillna(df, 0))
+print("\nreplace:")
+print(my_replace(df, 2, 20))
+Output:
+ 
+ 
+
+Q3] Write a program to implement following graphs in matplotlib library Line chart, bar chart, scatterplot, pie chart, histogram
+import matplotlib.pyplot as plt
+import numpy as np
+# Create sample data
+x = np.arange(1, 11)
+y = np.array([2, 4, 6, 8, 10, 12, 14, 16, 18, 20])
+# Line Chart
+plt.figure(figsize=(8, 4))
+plt.plot(x, y, marker='o', linestyle='-', color='b', label='Line Chart')
+plt.xlabel('X-axis')
+plt.ylabel('Y-axis')
+plt.title('Line Chart Example')
+plt.legend()
+plt.grid(True)
+plt.show()
+# Bar Chart
+categories = ['Category A', 'Category B', 'Category C', 'Category D']
+values = [15, 24, 10, 30]
+plt.figure(figsize=(8, 4))
+plt.bar(categories, values, color='g', alpha=0.7)
+plt.xlabel('Categories')
+plt.ylabel('Values')
+plt.title('Bar Chart Example')
+plt.show()
+# Scatterplot
+x = np.random.rand(50)
+y = np.random.rand(50)
+plt.figure(figsize=(8, 4))
+plt.scatter(x, y, c='r', marker='o', label='Scatterplot')
+plt.xlabel('X-axis')
+plt.ylabel('Y-axis')
+plt.title('Scatterplot Example')
+plt.legend()
+plt.grid(True)
+plt.show()
+# Pie Chart
+labels = ['Category A', 'Category B', 'Category C', 'Category D']
+sizes = [30, 15, 25, 20]
+colors = ['gold', 'yellowgreen', 'lightcoral', 'lightskyblue']
+plt.figure(figsize=(6, 6))
+plt.pie(sizes, labels=labels, colors=colors, autopct='%1.1f%%', startangle=140)
+plt.axis('equal')
+plt.title('Pie Chart Example')
+plt.show()
+# Histogram
+data = np.random.randn(1000)
+plt.figure(figsize=(8, 4))
+plt.hist(data, bins=20, color='purple', alpha=0.7)
+plt.xlabel('Value')
+plt.ylabel('Frequency')
+plt.title('Histogram Example')
+plt.show()
+
+Output:
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+Q4] Write a program to find the correlation matrix
+import pandas as pd
+# Sample dataset
+data = {
+    'A': [1, 2, 3, 4, 5],
+    'B': [2, 4, 1, 6, 8],
+    'C': [5, 7, 3, 8, 9],
+    'D': [1, 2, 3, 2, 1]
+}
+# Create a DataFrame
+df = pd.DataFrame(data)
+# Calculate the correlation matrix
+correlation_matrix = df.corr()
+# Display the correlation matrix
+print("Correlation Matrix:")
+print(correlation_matrix)
+Output:
+ 
+
+
+
+
+
+
+
+Q5] Create an Android application and understand the Project and file hierarchy.
+Activity_main.xml:
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="100">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/purple_500"
+        android:textSize="50dp"
+        android:layout_weight="30"
+        android:gravity="center"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="How are you?"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/purple_500"
+        android:textSize="50dp"
+        android:layout_weight="70"
+        android:gravity="center"
+        />
+</LinearLayout>
+
+
+
+
+Mainactivity.java:
+package com.example.myapplication
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+    }
+}
+Output:
+ 
+
+Q6] Develop an Android application that uses GUI components, Font and Colors
+Activity_main.xml:
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    android:background="@color/RosyBrown"
+    >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="2dp"
+        android:gravity="center"
+        android:padding="2dp"
+        android:text="Even Odd Program"
+        android:textSize="40dp"
+       android:textColor="@color/FireBrick" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="2dp"
+        android:padding="2dp"
+        android:text="Even Or Odd"
+        android:textSize="30dp"
+        android:textColor="@color/LightGrey"
+        />
+    <EditText
+        android:id="@+id/number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@color/Pink"
+        android:drawablePadding="10dp"
+        android:hint="Number"
+        android:inputType="number"
+        android:padding="20dp"
+        android:textColorHint="@color/HotPink" />
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Submit"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/PaleVioletRed"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        android:id="@+id/submit"
+        android:layout_margin="30dp"
+        android:padding="15dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/resultnum"
+        android:layout_below="@id/submit"
+        android:layout_margin="20dp"
+        android:textSize="30dp"
+        android:textColor="@color/teal_700"/>
+</LinearLayout>
+Mainactivity.java:
+package com.example.myapplication
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+    }
+}
+Output:
+ 
+
+
+Q7] Develop an Android application that uses Layout Managers
+Activity_main.xml:
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+    <TextView
+        android:id="@+id/firstNumberLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter First Number:"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="8dp"/>
+    <EditText
+        android:id="@+id/firstNumberEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/firstNumberLabel"
+        android:layout_alignBaseline="@+id/firstNumberLabel"
+        android:hint="Enter the first number"/>
+    <TextView
+        android:id="@+id/secondNumberLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter Second Number:"
+        android:layout_below="@+id/firstNumberLabel"
+        android:layout_alignStart="@+id/firstNumberLabel"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"/>
+    <EditText
+        android:id="@+id/secondNumberEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/secondNumberLabel"
+        android:layout_alignBaseline="@+id/secondNumberLabel"
+        android:hint="Enter the second number"/>
+    <Button
+        android:id="@+id/multiplyButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Multiply"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/secondNumberLabel"
+        android:layout_marginTop="16dp"/>
+    <TextView
+        android:id="@+id/resultTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/multiplyButton"
+        android:layout_marginTop="16dp"/>
+</RelativeLayout>
+Mainactivity.java:
+package com.example.myapplication
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+    }
+}
+Output:
+ 
+Q8] Develop an Android application that uses Layout Managers Login Form
+Activity_main.xml:
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_launcher_foreground"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"/>
+    <EditText
+        android:id="@+id/et_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Username"/>
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:inputType="textPassword"/>
+    <Button
+        android:id="@+id/btn_show_toast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:layout_gravity="center"/>
+</LinearLayout>
+Mainactivity.java:
+package com.example.loginform;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    private EditText usernameEditText;
+    private Button showToastButton;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Initialize UI elements
+        usernameEditText = findViewById(R.id.et_username);
+        showToastButton = findViewById(R.id.btn_show_toast);
+
+        // Set click listener for the button
+        showToastButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Get the entered username from the EditText
+                String username = usernameEditText.getText().toString();
+                    String toastMessage = "Username: " + username;
+                    Toast.makeText(MainActivity.this, toastMessage, Toast.LENGTH_SHORT).show();
+                            }
+        });
+    }
+}
+Output:
+ 
+Q9] Develop an Android application that uses Layout Managers and event listeners. Registration form
+Activity_main.xml:
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/registration"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/register"
+        android:text="Registration Form"
+        android:textSize="40dp"
+        android:gravity="center"
+        android:layout_margin="20dp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/studentname"
+        android:layout_below="@id/register"
+        android:background="#30ffffff"
+        android:hint="Student Name"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:layout_margin="10dp"
+        android:padding="20dp"
+        android:drawableLeft="@drawable/ic_baseline_person_24"
+        android:drawablePadding="10dp"
+        android:inputType="textPersonName"/>/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/studentemail"
+        android:layout_below="@id/studentname"
+        android:background="#30ffffff"
+        android:hint="Student Email"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:layout_margin="10dp"
+        android:padding="20dp"
+        android:drawableLeft="@drawable/ic_baseline_alternate_email_24"
+        android:drawablePadding="10dp"
+        android:inputType="textEmailAddress"/>/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/number"
+        android:layout_below="@id/studentemail"
+        android:background="#30ffffff"
+        android:hint="Mobile Number"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:layout_margin="10dp"
+        android:padding="20dp"
+        android:drawableLeft="@drawable/ic_baseline_local_phone_24"
+        android:drawablePadding="10dp"
+        android:inputType="text|phone"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/studentpassword"
+        android:layout_below="@id/number"
+        android:background="#30ffffff"
+        android:hint="Password"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:layout_margin="10dp"
+        android:padding="20dp"
+        android:drawableLeft="@drawable/ic_baseline_info_24"
+        android:drawablePadding="10dp"
+        android:inputType="textPassword"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/repassword"
+        android:layout_below="@id/studentpassword"
+        android:background="#30ffffff"
+        android:hint="Confirm Password"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:layout_margin="10dp"
+        android:padding="20dp"
+        android:drawableLeft="@drawable/ic_baseline_info_24"
+        android:drawablePadding="10dp"
+        android:inputType="textPassword"/>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/registerbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/repassword"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="20dp"
+        android:backgroundTint="@color/design_default_color_background"
+        android:text="Register"
+        android:textColor="@color/black"
+        android:layout_gravity="center"/>
+</LinearLayout>
+Mainactivity.java:
+package com.example.registrationform;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.Editable;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.android.material.button.MaterialButton;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        EditText studentname= (EditText) findViewById(R.id.studentname);
+        MaterialButton register= (MaterialButton) findViewById(R.id.registerbtn);
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String studentname1=studentname.getText().toString();
+                Toast.makeText(MainActivity.this,"Registered Student "+studentname1,Toast.LENGTH_SHORT).show();
+}
+        });
+    }
+}
+Output:
+ 
+
+Q10] Develop an Android application that uses Layout Managers and event listeners. Subscription form and Login form
+Activity_main.xml:
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"/>
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:inputType="textPassword"/>
+    <Button
+        android:id="@+id/btn_subscribe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Subscribe"/>
+</LinearLayout>
+Mainactivity.java:
+package com.example.subscriptionform;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+public class MainActivity extends AppCompatActivity {
+    private EditText emailEditText;
+    private EditText passwordEditText;
+    private Button subscribeButton;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        emailEditText = findViewById(R.id.email);
+        passwordEditText = findViewById(R.id.et_password);
+        subscribeButton = findViewById(R.id.btn_subscribe);
+        subscribeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = emailEditText.getText().toString();
+                String password = passwordEditText.getText().toString();
+                // You can add logic here to handle the subscription process
+                Toast.makeText(MainActivity.this, "Subscription successful", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+}
+Output:
+ 
+
+
+
+
+
